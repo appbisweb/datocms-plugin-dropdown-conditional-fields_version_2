@@ -1,89 +1,60 @@
 {
   "name": "datocms-plugin-dropdown-conditional-fields",
-  "homepage": "https://github.com/dewyze/datocms-plugin-dropdown-conditional-fields",
-  "version": "0.1.0",
-  "description": "Allow fields to be hidden/shown based on the values of a dropdown field.",
-  "main": "index.js",
+  "homepage": "https://github.com/janluther/datocms-plugin-dropdown-conditional-fields",
+  "version": "2.0.0",
+  "description": "Conditionally show or hide fields based on a dropdown selection. Visual rule editor included — no JSON required.",
+  "main": "dist/index.html",
+  "type": "module",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --port 5000",
-    "dist": "NODE_ENV=production webpack --progress",
-    "addToProject": "yo datocms-plugin:add-to-project",
-    "prepublishOnly": "rimraf lib dist && mkdir dist && npm run dist",
-    "lint": "eslint \"./src/*.{js,jsx}\"",
-    "test": "echo 1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
-    "datocms",
     "datocms-plugin",
+    "datocms",
     "field-addon",
-    "string-field",
-    "conditional fields",
+    "conditional-fields",
     "dropdown"
   ],
   "files": [
     "dist",
     "docs"
   ],
-  "author": "John DeWyze <john@dewyze.dev>",
+  "author": {
+    "name": "Jan Luther",
+    "url": "https://app-bis-web.de"
+  },
   "license": "ISC",
   "datoCmsPlugin": {
-    "title": "Dropdown Conditional Fields",
-    "previewImage": "docs/preview.gif",
+    "title": "Dropdown Conditional Fields v2",
+    "previewImage": "docs/demo.mp4",
     "coverImage": "docs/cover.png",
     "entryPoint": "dist/index.html",
-    "pluginType": "field_addon",
-    "fieldTypes": [
-      "string"
-    ],
-    "parameters": {
-      "global": [
-        {
-          "id": "developmentMode",
-          "label": "Development mode",
-          "type": "boolean",
-          "required": true,
-          "default": false,
-          "hint": "Shows debug messages in console"
-        }
-      ],
-      "instance": [
-        {
-          "id": "dependencies",
-          "label": "Dependencies",
-          "type": "json",
-          "required": true
-        }
-      ]
-    }
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.54",
-    "@babel/core": "^7.0.0-beta.54",
-    "@babel/preset-env": "^7.0.0-beta.54",
-    "@babel/register": "^7.0.0-beta.54",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^8.0.0-beta",
-    "css-loader": "^1.0.0",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-import-resolver-webpack": "^0.10.1",
-    "eslint-loader": "^2.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "generator-datocms-plugin": "^1.0.24",
-    "html-webpack-inline-source-plugin": "^0.0.10",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.3",
-    "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
-    "serve": "^10.0.2",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.16.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.10",
-    "yo": "^3.1.1"
+    "permissions": []
   },
   "dependencies": {
-    "html-webpack-tags-plugin": "^2.0.17",
-    "object.values": "^1.1.5"
+    "datocms-plugin-sdk": "^2.1.1",
+    "datocms-react-ui": "^2.1.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "jsdom": "^26.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
   }
 }
