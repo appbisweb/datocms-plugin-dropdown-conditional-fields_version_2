@@ -199,7 +199,7 @@ connect({
       };
       const blockRefs: BlockRef[] = [];
 
-      function scanForBlockRefs(val: unknown, depth: number): void {
+      const scanForBlockRefs = (val: unknown, depth: number): void => {
         if (depth > 4 || !val) return;
         if (Array.isArray(val)) {
           for (const item of val) {
@@ -232,7 +232,7 @@ connect({
             scanForBlockRefs(v, depth + 1);
           }
         }
-      }
+      };
 
       scanForBlockRefs(fullAttrs, 0);
 

@@ -1,7 +1,7 @@
 {
   "name": "datocms-plugin-dropdown-conditional-fields-v2",
   "homepage": "https://github.com/appbisweb/datocms-plugin-dropdown-conditional-fields_version_2",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Conditionally show or hide fields based on a dropdown selection. Visual rule editor included — no JSON required.",
   "main": "dist/index.html",
   "type": "module",
@@ -43,18 +43,18 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "@vitejs/plugin-react": "^4.3.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "jsdom": "^26.0.0",
-    "typescript": "^5.7.0",
-    "vite": "^6.0.0",
-    "vitest": "^3.0.0"
+    "jsdom": "^29.0.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.2"
   }
 }
