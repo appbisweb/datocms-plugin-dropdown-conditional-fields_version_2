@@ -1,7 +1,7 @@
 {
   "name": "datocms-plugin-dropdown-conditional-fields-v2",
   "homepage": "https://github.com/appbisweb/datocms-plugin-dropdown-conditional-fields_version_2",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Conditionally show or hide fields based on a dropdown selection. Visual rule editor included — no JSON required.",
   "main": "dist/index.html",
   "type": "module",
@@ -34,7 +34,7 @@
     "previewImage": "docs/demo.mp4",
     "coverImage": "docs/cover.png",
     "entryPoint": "dist/index.html",
-    "permissions": []
+    "permissions": ["currentUserAccessToken"]
   },
   "dependencies": {
     "datocms-plugin-sdk": "^2.1.1",
