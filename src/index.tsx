@@ -8,31 +8,12 @@ import { render } from "./lib/render";
 import ConfigScreen from "./entrypoints/ConfigScreen";
 import FieldExtension from "./entrypoints/FieldExtension";
 import FieldExtensionConfig from "./entrypoints/FieldExtensionConfig";
-import { normalizeValue } from "./lib/toggleFields";
+import { isFieldValueEmpty, normalizeValue } from "./lib/toggleFields";
 import type { GlobalParameters, Rule } from "./lib/types";
 
 const EXTENSION_ID = "conditionalFields";
 
 let lastUpsertAlertMs = 0;
-
-function isFieldValueEmpty(value: unknown, depth = 0): boolean {
-  if (value === null || value === undefined || value === "") return true;
-  if (Array.isArray(value)) return value.length === 0;
-  if (typeof value === "object") {
-    const obj = value as Record<string, unknown>;
-    const keys = Object.keys(obj);
-    if (keys.length === 0) return true;
-
-    if ("upload_id" in obj) {
-      return obj.upload_id === null || obj.upload_id === undefined;
-    }
-
-    if (depth >= 2) return false;
-
-    return Object.values(obj).every((v) => isFieldValueEmpty(v, depth + 1));
-  }
-  return false;
-}
 
 connect({
   manualFieldExtensions() {
@@ -356,16 +337,30 @@ connect({
             if (!isFieldValueEmpty(fieldValue)) continue;
 
             const reqField = Object.values(ctx.fields).find(
-              (f) => f?.attributes.api_key === reqApiKey,
+              (f) =>
+                f?.attributes.api_key === reqApiKey &&
+                f.relationships.item_type.data.id === af.fieldTypeId,
             );
             const label = reqField?.attributes.label ?? reqApiKey;
 
             const now = Date.now();
-            if (now - lastUpsertAlertMs > 2000) {
+            if (now - lastUpsertAlertMs > 4000) {
               lastUpsertAlertMs = now;
               ctx.alert(
                 `The field "${label}" is required when "${dropdownLabel}" is selected but is currently empty. Please fill it in.`,
               );
+              try {
+                (
+                  ctx as unknown as {
+                    scrollToField: (
+                      path: string,
+                      locale?: string,
+                    ) => void;
+                  }
+                ).scrollToField(reqApiKey);
+              } catch {
+                /* scrollToField may not be available */
+              }
             }
             return false;
           }

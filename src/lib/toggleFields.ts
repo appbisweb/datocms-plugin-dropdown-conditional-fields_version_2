@@ -1,5 +1,21 @@
 import type { Rule } from "./types";
 
+export function isFieldValueEmpty(value: unknown, depth = 0): boolean {
+  if (value === null || value === undefined || value === "") return true;
+  if (Array.isArray(value)) return value.length === 0;
+  if (typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+    const keys = Object.keys(obj);
+    if (keys.length === 0) return true;
+    if ("upload_id" in obj) {
+      return obj.upload_id === null || obj.upload_id === undefined;
+    }
+    if (depth >= 2) return false;
+    return Object.values(obj).every((v) => isFieldValueEmpty(v, depth + 1));
+  }
+  return false;
+}
+
 export function normalizeValue(value: unknown): string | null {
   if (typeof value === "string" && value.length > 0) {
     return value.toLowerCase();
